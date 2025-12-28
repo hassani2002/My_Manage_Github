@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>MyManager</title>
+  <link rel="stylesheet" href="manage.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+
+<!-- LOGIN -->
+<div id="loginPage" class="login-page">
+  <form class="login-form" onsubmit="login(event)">
+    <h2>Connexion</h2>
+    <input id="email" type="email" placeholder="Email" required>
+    <input id="password" type="password" placeholder="Mot de passe" required>
+    <button type="submit">Se connecter</button>
+    <p class="hint">admin@test.com / 1234</p>
+  </form>
+</div>
+
+<!-- APP -->
+<div id="app" class="hidden">
+
+  <aside class="sidebar">
+    <h1>MyManager</h1>
+    <button onclick="showDashboard()">📊 Dashboard</button>
+    <button onclick="showEntity('events')">🎉 Événements</button>
+    <button onclick="showEntity('participants')">👥 Participants</button>
+    <button onclick="showEntity('venues')">🏢 Salles</button>
+    <button onclick="showEntity('tickets')">🎫 Billets</button>
+    <button class="logout" onclick="logout()">🚪 Déconnexion</button>
+  </aside>
+
+  <main class="content">
+
+    <!-- DASHBOARD -->
+    <section id="dashboard">
+      <h2>Tableau de bord</h2>
+
+      <div class="stats">
+        <div>Événements : <span id="kEvents">0</span></div>
+        <div>Participants : <span id="kParticipants">0</span></div>
+        <div>Salles : <span id="kVenues">0</span></div>
+        <div>Billets : <span id="kTickets">0</span></div>
+      </div>
+
+      <canvas id="chart"></canvas>
+    </section>
+
+    <!-- ENTITY VIEW -->
+    <section id="entityView" class="hidden">
+      <div class="entity-header">
+        <h2 id="entityTitle"></h2>
+        <button onclick="openModal()">➕ Ajouter</button>
+      </div>
+
+      <table>
+        <thead>
+          <tr id="tableHead"></tr>
+        </thead>
+        <tbody id="tableBody"></tbody>
+      </table>
+    </section>
+
+  </main>
+</div>
+
+<!-- MODAL -->
+<div id="modal" class="modal hidden" onclick="closeModal(event)">
+  <div class="modal-content">
+    <h3 id="modalTitle"></h3>
+    <form id="form" onsubmit="saveItem(event)"></form>
+  </div>
+</div>
+
+<script src="manage.js"></script>
+</body>
+</html>
+
